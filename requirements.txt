@@ -4,3 +4,5 @@ Ming==0.5.5
 pymongo==2.9.4
 facebook-sdk==2.0.0
 rq==0.7.1
+Jinja2==2.9.6
+aiohttp-jinja2==0.13.0
