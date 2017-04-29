@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pymongo import MongoClient
 from ming import Session, Field, schema, create_datastore
 from ming.declarative import Document
@@ -15,3 +17,14 @@ class Subscription(Document):
     url = Field(str)
     keyword = Field(str)
     mail = Field(str)
+
+class Post(Document):
+    class __mongometa__:
+        session = session
+        name = 'post'
+
+    _id = Field(schema.ObjectId)
+    created = Field(datetime)
+    text = Field(str)
+    page = Field(str)
+    link = Field(str)
