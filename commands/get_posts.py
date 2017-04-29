@@ -1,7 +1,6 @@
 import sys
-from dateutil import parser
-
 import facebook
+from dateutil import parser
 
 sys.path.append('..')
 from app.models import Subscription, Post
@@ -18,9 +17,10 @@ def get_page_posts(url):
         data = {'link': 'www.facebook.com/{}/posts/{}'.format(id1, id2),
                 'created': parser.parse(post['created_time']), 'text': post['message'],
                 'page': url}
-        p = Post(data)
-        p.m.save()
+        if not Post.m.find(data).first():
+            p = Post(data)
+            p.m.save()
 
 if __name__ == '__main__':
-    for page_url in  Subscription.m.distinct('url'):
+    for page_url in Subscription.m.distinct('url'):
         get_page_posts(page_url)

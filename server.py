@@ -1,4 +1,5 @@
 import asyncio
+from datetime import datetime, timedelta
 from aiohttp import web
 from pymongo import MongoClient
 
@@ -9,6 +10,7 @@ app = web.Application(loop=loop)
 
 async def add_entry(request):
     data = await request.json()
+    data['data']['offset'] = datetime.today() - timedelta(hours=24)
     sub = Subscription(data['data'])
     try:
         sub.m.save()

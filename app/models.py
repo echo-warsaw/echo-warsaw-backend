@@ -8,6 +8,7 @@ session = Session(create_datastore('mongodb://localhost:27017/echo'))
 
 db = MongoClient().echo
 
+
 class Subscription(Document):
     class __mongometa__:
         session = session
@@ -17,6 +18,8 @@ class Subscription(Document):
     url = Field(str)
     keyword = Field(str)
     mail = Field(str)
+    offset = Field(datetime)
+
 
 class Post(Document):
     class __mongometa__:
