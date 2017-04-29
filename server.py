@@ -9,8 +9,7 @@ app = web.Application(loop=loop)
 
 async def add_entry(request):
     data = await request.json()
-    print('data', data)
-    sub = Subscription(**data)
+    sub = Subscription(data['data'])
     try:
         sub.m.save()
         return web.json_response(status=200, data={'ok': True})
