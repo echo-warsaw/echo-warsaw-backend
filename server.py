@@ -11,8 +11,11 @@ async def add_entry(request):
     data = await request.json()
     print('data', data)
     sub = Subscription(**data)
-    sub.m.save()
-    return web.json_response({'ok': True})
+    try:
+        sub.m.save()
+        return web.json_response(status=200, data={'ok': True})
+    except:
+        return web.json_response(status=500, data={'ok': False})
 
 app.router.add_post('/api/new', add_entry)
 
