@@ -15,8 +15,11 @@ class Subscription(Document):
         name = 'subscription'
 
     _id = Field(schema.ObjectId)
-    url = Field(str)
+    id = Field(str)
     keyword = Field(str)
+    # synonyms = Field(schema.Array(str))
+    with_synonyms = Field(bool)
+    telephone = Field(str, required=False)
     mail = Field(str)
     offset = Field(datetime)
 

@@ -12,7 +12,7 @@ q = Queue(connection=Redis())
 def get_notifications(subs):
     for sub in subs:
         try:
-            posts = Post.m.find({'page': sub['url'], 'text': {'$regex': sub['keyword']}, 'created': {'$gte': sub['offset']}}
+            posts = Post.m.find({'page': sub['id'], 'text': {'$regex': sub['keyword']}, 'created': {'$gte': sub['offset']}}
                                 ).all()
 
             notifications = [(sub['mail'], post['link'], sub['keyword']) for post in posts]

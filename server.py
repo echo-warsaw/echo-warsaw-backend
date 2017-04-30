@@ -25,6 +25,7 @@ async def index(request):
 
 async def add_entry(request):
     data = await request.json()
+    print('data', data)
     data['data']['offset'] = datetime.today() - timedelta(days=3)
     sub = Subscription(data['data'])
     try:
