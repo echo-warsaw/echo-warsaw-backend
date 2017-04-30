@@ -5,7 +5,7 @@ from datetime import datetime
 
 sys.path.append('..')
 from app.models import Subscription, Post
-from commands.send_mail import compose_mail
+from send_mail import compose_mail
 
 q = Queue(connection=Redis())
 
