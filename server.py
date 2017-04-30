@@ -21,12 +21,17 @@ async def index(request):
     return
 
 async def add_entry(request):
+    print("wszedlem")
     data = await request.json()
     data['data']['offset'] = datetime.today() - timedelta(hours=24)
-    data['data']['synonyms'] = gn.generate_synonyms(data['data']['keyword'])
+    data['data']['synonyms'] = list(gn.generate_synonyms(data['data']['keyword']))
     sub = Subscription(data['data'])
+    print("po modelu")
     try:
+        print(data['data']['synonyms'])
+        print("przed zapisaniem")
         sub.m.save()
+        print("ok zapisane")
         return web.json_response(status=200, data={'ok': True})
     except:
         return web.json_response(status=500, data={'ok': False})

@@ -15,8 +15,8 @@ def get_notifications(subs):
         try:
             keyword = sub['keyword']
             synonyms = sub['synonyms']
-            regex = stemmer(keyword) + '|' + '|'.join(synonyms)
-            posts = Post.m.find({'page': sub['url'], 'text': {'$regex': regex}, 'created': {'$gte': sub['offset']}}
+            regex = '.*' + stemmer(keyword) + '.*|.*' + '.*|.*'.join(stemmer(syn) for syn in synonyms) + '.*'
+            posts = Post.m.find({'page': sub['url'], 'text': {'$regex': regex}}#, 'created': {'$gte': sub['offset']}}
                                 ).all()
 
             notifications = [(sub['mail'], post['link'], sub['keyword']) for post in posts]
