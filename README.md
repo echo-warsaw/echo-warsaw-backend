@@ -1,3 +1,6 @@
+# System requirements
+[mongodb, redis-server, yarn]
+
 # Installation
 
 git clone https://github.com/echo-warsaw/echo-warsaw-backend.git

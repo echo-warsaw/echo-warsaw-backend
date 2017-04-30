@@ -1,4 +1,5 @@
 .idea
+app/__pycache__
 static/*
 !static/__init__.py
 config.py
