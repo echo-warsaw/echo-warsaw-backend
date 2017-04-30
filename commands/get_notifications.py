@@ -21,7 +21,7 @@ def get_notifications(subs):
 
             notifications = [(sub['mail'], post['link'], sub['keyword']) for post in posts]
             for n in notifications:
-                q.enqueue(compose_mail, *n)
+                compose_mail(*n)
 
             s = Subscription.m.find({'_id': sub['_id']}).one()
             s.offset = datetime.now()

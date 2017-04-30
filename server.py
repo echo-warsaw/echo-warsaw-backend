@@ -1,5 +1,6 @@
 import os
 import asyncio
+import argparse
 import aiohttp_jinja2
 import jinja2
 from datetime import datetime, timedelta
@@ -12,6 +13,9 @@ from keywords_search import generate_synonyms as gn
 APP_DIR = os.path.dirname(os.path.realpath(__file__))
 STATIC_DIR = os.path.join(APP_DIR, 'static')
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--port')
+
 loop = asyncio.get_event_loop()
 app = web.Application(loop=loop)
 aiohttp_jinja2.setup(app, loader=jinja2.PackageLoader('static', './'))
@@ -23,8 +27,12 @@ async def index(request):
 async def add_entry(request):
     print("wszedlem")
     data = await request.json()
+<<<<<<< HEAD
     data['data']['offset'] = datetime.today() - timedelta(hours=24)
     data['data']['synonyms'] = list(gn.generate_synonyms(data['data']['keyword']))
+=======
+    data['data']['offset'] = datetime.today() - timedelta(days=3)
+>>>>>>> 10d903b3a8772d1dae0d91a168bf9ac43ef1649f
     sub = Subscription(data['data'])
     print("po modelu")
     try:
@@ -43,4 +51,6 @@ app.router.add_static('/static', STATIC_DIR)
 if __name__ == '__main__':
     db = MongoClient().echo
 
-    web.run_app(app, host='127.0.0.1', port=8001)
+    args = parser.parse_args()
+    port = int(args.port) if args.port else 8001
+    web.run_app(app, host='127.0.0.1', port=port)
