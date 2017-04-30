@@ -20,7 +20,7 @@ class Subscription(Document):
     synonyms = Field(schema.Array(str))
     mail = Field(str)
     offset = Field(datetime)
-    with_synonyms = Field(boolean)
+    with_synonyms = Field(bool)
 
 
 class Post(Document):
