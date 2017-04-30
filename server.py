@@ -27,12 +27,8 @@ async def index(request):
 async def add_entry(request):
     print("wszedlem")
     data = await request.json()
-<<<<<<< HEAD
     data['data']['offset'] = datetime.today() - timedelta(hours=24)
     data['data']['synonyms'] = list(gn.generate_synonyms(data['data']['keyword']))
-=======
-    data['data']['offset'] = datetime.today() - timedelta(days=3)
->>>>>>> 10d903b3a8772d1dae0d91a168bf9ac43ef1649f
     sub = Subscription(data['data'])
     print("po modelu")
     try:

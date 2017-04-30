@@ -13,8 +13,9 @@ q = Queue(connection=Redis())
 def get_notifications(subs):
     for sub in subs:
         try:
-            keyword = sub['keyword']
-            synonyms = sub['synonyms']
+            if sub['with_ssynonyms']:
+                keyword = sub['keyword']
+                synonyms = sub['synonyms']
             regex = '.*' + stemmer(keyword) + '.*|.*' + '.*|.*'.join(stemmer(syn) for syn in synonyms) + '.*'
             posts = Post.m.find({'page': sub['url'], 'text': {'$regex': regex}}#, 'created': {'$gte': sub['offset']}}
                                 ).all()
