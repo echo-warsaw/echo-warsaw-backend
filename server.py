@@ -7,6 +7,7 @@ from aiohttp import web
 from pymongo import MongoClient
 
 from app.models import Subscription
+from keywords_search import generate_synonyms as gn
 
 APP_DIR = os.path.dirname(os.path.realpath(__file__))
 STATIC_DIR = os.path.join(APP_DIR, 'static')
@@ -22,6 +23,7 @@ async def index(request):
 async def add_entry(request):
     data = await request.json()
     data['data']['offset'] = datetime.today() - timedelta(hours=24)
+    data['data']['synonyms'] = gn.generate_synonyms(data['data']['keyword'])
     sub = Subscription(data['data'])
     try:
         sub.m.save()

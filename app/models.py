@@ -17,6 +17,7 @@ class Subscription(Document):
     _id = Field(schema.ObjectId)
     url = Field(str)
     keyword = Field(str)
+    synonyms = Field(str)
     mail = Field(str)
     offset = Field(datetime)
 

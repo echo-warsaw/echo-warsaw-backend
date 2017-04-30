@@ -7,3 +7,4 @@ rq==0.7.1
 Jinja2==2.9.6
 aiohttp-jinja2==0.13.0
 python-dateutil==2.6.0
+nltk==3.2.2
