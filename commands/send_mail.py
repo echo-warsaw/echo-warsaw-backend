@@ -11,8 +11,8 @@ def compose_mail(address, link, keyword):
     smtpObj.starttls()
     smtpObj.login(MAIL_ACCOUNT, MAIL_PASSWORD)
 
-    msg = 'Subject: Nowa informacja na temat {key}\n' \
-          'W poście {link} pojawiła się nowa informacja na temat {key}.'.format(key=keyword, link=link)
+    msg = u'Subject: Nowa informacja na temat {key}\n' \
+          u'W poście {link} pojawiła się nowa informacja na temat {key}.'.format(key=keyword, link=link)
 
     smtpObj.sendmail(MAIL_ACCOUNT, address, msg)
 
